@@ -1,6 +1,6 @@
 import sys
 import pandas as pd
-import numpy as np
+#import numpy as np
 from sqlalchemy import create_engine
 
 def load_data(messages_filepath, categories_filepath):
@@ -35,7 +35,7 @@ def clean_data(df):
 
 def save_data(df, database_filename):
     engine = create_engine(f'sqlite:///{database_filename}')
-    df.to_sql(database_filename, engine, index=False)
+    df.to_sql('DisasterResponse', engine, index=False)
       
 
 

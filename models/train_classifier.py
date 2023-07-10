@@ -22,10 +22,11 @@ import pickle
 
 def load_data(database_filepath):
     engine = create_engine(f'sqlite:///{database_filepath}')
-    df = pd.read_sql_table(database_filepath, engine)
+    df = pd.read_sql_table('DisasterResponse', engine)
     X = df.message.values
     y = df.iloc[:,4:]
-    return X, y
+    category_names=list(y.columns)
+    return X, y, category_names
 
 def tokenize(text):
     url_regex = 'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+'
