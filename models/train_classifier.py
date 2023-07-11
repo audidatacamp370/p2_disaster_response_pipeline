@@ -1,6 +1,6 @@
 import sys
 import re
-import numpy as np
+#import numpy as np
 import pandas as pd
 from sqlalchemy import create_engine
 import nltk
@@ -8,7 +8,7 @@ from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import stopwords
 
-nltk.download(['punkt', 'wordnet', 'averaged_perceptron_tagger', 'stopwords'])
+nltk.download(['punkt', 'wordnet', 'averaged_perceptron_tagger', 'stopwords','omw-1.4'])
 
 from sklearn.pipeline import Pipeline, FeatureUnion
 from sklearn.base import BaseEstimator, TransformerMixin
@@ -24,9 +24,9 @@ def load_data(database_filepath):
     engine = create_engine(f'sqlite:///{database_filepath}')
     df = pd.read_sql_table('DisasterResponse', engine)
     X = df.message.values
-    y = df.iloc[:,4:]
-    category_names=list(y.columns)
-    return X, y, category_names
+    Y = df.iloc[:,4:]
+    category_names=list(Y.columns)
+    return X, Y, category_names
 
 def tokenize(text):
     url_regex = 'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+'
@@ -76,26 +76,32 @@ def build_model():
                 ('tfidf', TfidfTransformer())
             ])),
 
-            ('starting_verb', StartingVerbExtractor())
+        #     ('starting_verb', StartingVerbExtractor())
         ])),
 
-        ('clf', MultiOutputClassifier(AdaBoostClassifier(), n_jobs=-1))
+        ('clf', MultiOutputClassifier(AdaBoostClassifier()))
     ])
         
     
     parameters = {
-        'clf__estimator__base_estimator': [None, 'RandomForestClassifier'],
-        'clf__estimator__n_estimators': [50, 100, 200],
+#        'clf__estimator__base_estimator': [None, 'RandomForestClassifier'],
+#        'clf__estimator__n_estimators': [50,60],
         'clf__estimator__learning_rate': [0.5, 1, 2]
         }
 
-    model = GridSearchCV(pipeline, param_grid=parameters, cv=2, n_jobs=-1)
+#    model = pipeline
+    model = GridSearchCV(pipeline, param_grid=parameters)
 
     return model
 
 def evaluate_model(model, X_test, Y_test, category_names):
-    pass
-
+    Y_pred = model.predict(X_test)
+    for category in category_names:
+#        print(category,"\n :", classification_report(Y_test[category].values, pd.DataFrame(Y_pred, columns=category_names)[category]) )
+        print("Accuray", category,"\n :", accuracy_score(Y_test[category].values, pd.DataFrame(Y_pred, columns=category_names)[category]) )
+        
+        
+    
 
 def save_model(model, model_filepath):
     pickle.dump(model, open(model_filepath, 'wb'))
