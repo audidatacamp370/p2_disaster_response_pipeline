@@ -4,6 +4,15 @@ import pandas as pd
 from sqlalchemy import create_engine
 
 def load_data(messages_filepath, categories_filepath):
+    """
+    loading massage data and categary data from csv-files
+    
+    :Input 
+    messages_filepath: - path to disaster_messages.csv
+    categories_filepath: - path to disaster_categories.csv
+    :Output 
+    df - merged dataframe
+    """    
     messages = pd.read_csv(messages_filepath)
     categories = pd.read_csv(categories_filepath)
     df = messages.merge(categories, how='inner', on='id')
@@ -11,6 +20,14 @@ def load_data(messages_filepath, categories_filepath):
 
 
 def clean_data(df):
+    """
+    cleaning dataframe
+    
+    :Input 
+    df: - merged dataframe of message and category data
+    :Output 
+    df - cleaned dataframe
+    """      
     categories = df.categories.str.split(';', expand=True)
     row = categories.iloc[0]
     # rename the columns of `categories`
@@ -34,6 +51,15 @@ def clean_data(df):
     return df
 
 def save_data(df, database_filename):
+    """
+    saving dataframe to sql-database
+    
+    :Input 
+    df: - cleaned dataframe
+    database_filename: - name of sql database
+    :Output 
+
+    """      
     engine = create_engine(f'sqlite:///{database_filename}')
     df.to_sql('DisasterResponse', engine, index=False)
       
