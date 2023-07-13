@@ -31,30 +31,30 @@ The main focus of this Project is to built a model for an API that classifies di
 <a id='filedesc'></a>
 ## Files
 
-    > app
-    >
-    >> template
-    >> run.py                   # Flask file that runs app
-    >>> master.html            # main page of web app
-    >>> go.html                # classification result page of web app
+> app
+>
+>> template
+>> run.py                   # Flask file that runs app
+>>> master.html            # main page of web app
+>>> go.html                # classification result page of web app
 
-    > data
-    >
-    >> disaster_categories.csv  # data to process 
-    >>
-    >> disaster_messages.csv    # data to process
-    >>
-    >> process_data.py
-    >>
-    >> InsertDatabaseName.db   # database to save clean data to
+> data
+>
+>> disaster_categories.csv  # data to process 
+>>
+>> disaster_messages.csv    # data to process
+>>
+>> process_data.py
+>>
+>> InsertDatabaseName.db   # database to save clean data to
 
-    > models
-    >
-    >> train_classifier.py
-    >>
-    >> classifier.pkl           # saved model 
+> models
+>
+>> train_classifier.py
+>>
+>> classifier.pkl           # saved model 
 
-    > README.md
+> README.md
 
 <a id='instruct'></a>
 ## Instructions:
