@@ -33,8 +33,9 @@ The main focus of this Project is to built a model for an API that classifies di
 
 > app
 >
->> template
 >> run.py                   # Flask file that runs app
+>>
+>> template  
 >>> master.html            # main page of web app
 >>> go.html                # classification result page of web app
 
