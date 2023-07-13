@@ -36,7 +36,8 @@ The main focus of this Project is to built a model for an API that classifies di
 >> run.py                   # Flask file that runs app
 >>
 >> template  
->>> master.html            # main page of web app
+>>> master.html            # main page of web app  
+>>>
 >>> go.html                # classification result page of web app
 
 > data
@@ -47,7 +48,7 @@ The main focus of this Project is to built a model for an API that classifies di
 >>
 >> process_data.py
 >>
->> InsertDatabaseName.db   # database to save clean data to
+>> DisasterResponse.db   # database to save clean data to
 
 > models
 >
