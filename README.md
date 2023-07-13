@@ -31,10 +31,14 @@ The main focus of this Project is to built a model for an API that classifies di
 <a id='filedesc'></a>
 ## Files
 
-- app
+app
+
 | - template
+
 | |- master.html  # main page of web app
+
 | |- go.html  # classification result page of web app
+
 |- run.py  # Flask file that runs app
 
 - data
