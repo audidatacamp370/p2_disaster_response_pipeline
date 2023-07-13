@@ -50,7 +50,7 @@ The main focus of this Project is to built a model for an API that classifies di
 - README.md
 
 <a id='instruct'></a>
-### Instructions:
+## Instructions:
 1. Run the following commands in the project's root directory to set up your database and model.
 
     - To run ETL pipeline that cleans data and stores in database
