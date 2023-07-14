@@ -48,6 +48,15 @@ def clean_data(df):
     # drop duplicates
     df.drop_duplicates(inplace=True)
     
+    # drop row where related column has the value 2
+    df=df[df['related']!=2]
+    
+    # drop columns with only one unique value
+    for column in df.iloc[:,4:].columns:
+        if df[column].nunique()==1:
+            df.drop(column, inplace=True, axis=1)
+
+    
     return df
 
 def save_data(df, database_filename):
@@ -61,7 +70,7 @@ def save_data(df, database_filename):
 
     """      
     engine = create_engine(f'sqlite:///{database_filename}')
-    df.to_sql('DisasterResponse', engine, index=False)
+    df.to_sql('DisasterResponse', engine, index=False, if_exists='replace')
       
 
 
