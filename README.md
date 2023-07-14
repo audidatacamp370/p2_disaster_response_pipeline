@@ -28,6 +28,11 @@ Disaster data from Appen (formally Figure 8)
 ## Project Motivation
 The main focus of this Project is to built a model for an API that classifies disaster messages.
 
+This project could be very helpful in the case of an Emergency.  
+It categorizes incoming messages in real time and can contact the respnosible agencies.
+
+This project includes a web app where messages can be entered and the output will be its classification.
+
 <a id='filedesc'></a>
 ## Files
 
